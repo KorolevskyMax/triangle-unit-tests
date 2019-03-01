@@ -6,7 +6,7 @@ Feature: Check validate number of arguments function
   # позитивный тест - получения трех переменных
   Scenario: Retrieving 3 variables
     # задаем начальные данные
-    Given I have a set of parameters: 1 2 3
+    Given I have a set of parameters: [1, 2, 3]
     # передаем параметры в функцию
     When I pass parameters to the function
     # сверяем результат (результат приводится перед сравнением к строке
@@ -14,7 +14,7 @@ Feature: Check validate number of arguments function
 
   Scenario Outline: Pass incorrect amount of variables
     # задаем начальные данные
-    Given I have a set of parameters: <params>
+    Given I have a set of parameters: [<params>]
     # передаем параметры в функцию
     When I pass parameters to the function
     # сверяем текст ошибки (результат приводится перед сравнением к строке)
@@ -23,8 +23,8 @@ Feature: Check validate number of arguments function
     And result error type should be: ValueError
 
     Examples:
-      | params  | error                                           |
-      | none    | not enough values to unpack (expected 3, got 0) |
-      | a       | not enough values to unpack (expected 3, got 1) |
-      | 1 2     | not enough values to unpack (expected 3, got 2) |
-      | ! @ # $ | too many values to unpack (expected 3)          |
+      | params     | error                                           |
+      | none       | not enough values to unpack (expected 3, got 0) |
+      | a          | not enough values to unpack (expected 3, got 1) |
+      | 1, 2       | not enough values to unpack (expected 3, got 2) |
+      | !, @, #, $ | too many values to unpack (expected 3)          |

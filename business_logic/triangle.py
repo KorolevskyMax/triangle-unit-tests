@@ -18,19 +18,23 @@ EXCEPTIONS = {
 }
 
 
-def validate_number_of_arguments(sides):
+def validate_number_of_arguments(sides) -> tuple:
     """Validating number of sides to be equal 3 and returns sides as three variables, if it's not - raises ValueError"""
     a, b, c = sides
     return a, b, c
 
 
-def convert_arguments_to_floats(sides):
+def convert_arguments_to_floats(sides) -> list:
     """Converts and returns list of variables to list of floats, if couldn't - raises ValueError"""
     return [float(x) for x in sides]
 
 
 def check_that_triangle_could_exist(a, b, c):
-    """Checks that triangle sides greater than zero, if not - raises AssertionError"""
+    """Checks that triangle sides greater than zero, if not - raises AssertionError
+    :param a:
+    :param b:
+    :param c:
+    """
     if a == 0:
         raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, a))
     elif b == 0:
@@ -50,6 +54,8 @@ def check_that_triangle_could_exist(a, b, c):
         # elif not(b + c > a):
         #     raise Exception(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a)) #here is a bug
         # TODO: HOMEWORK! how to organize this validation to shorten the spaghetti code? """
+    else:
+        raise ValueError("incorrect parameter type")
 
 
 def get_triangle_type(a, b, c):
@@ -63,7 +69,7 @@ def get_triangle_type(a, b, c):
 
 
 def validate_triangle(sides):
-    """Validating triangle, returns exceptions if something whent wrong or triangle type if triangle is valid"""
+    """Validating triangle, returns exceptions if something went wrong or triangle type if triangle is valid"""
     sides = convert_arguments_to_floats(sides)
     a, b, c = validate_number_of_arguments(sides)
     check_that_triangle_could_exist(a, b, c)

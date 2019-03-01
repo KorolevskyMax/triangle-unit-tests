@@ -9,14 +9,14 @@ def step_impl(context, function_name):
     context.function = getattr(triangle, function_name)
 
 
-@given("I have a set of parameters: none")
+@given("I have a set of parameters: [none]")
 def step_impl(context):
     context.params = []
 
 
-@given("I have a set of parameters: {params}")
+@given("I have a set of parameters: [{params}]")
 def step_impl(context, params):
-    context.params = params.split(" ")
+    context.params = params.split(", ")
 
 
 @when("I pass parameters to the function")
@@ -35,3 +35,9 @@ def step_impl(context, expected_result):
 @step("result error type should be: {expected_error_type}")
 def step_impl(context, expected_error_type):
     assert_equals(expected_error_type, str(type(context.actual_result).__name__))
+
+
+@step("type of each result variable: {expected_type}")
+def step_impl(context, expected_type):
+    for x in context.actual_result:
+        assert_equals(type(x).__name__, expected_type)
