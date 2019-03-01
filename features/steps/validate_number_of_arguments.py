@@ -38,11 +38,11 @@ def step_impl(context):
 def vars_equals(_context, column: Tuple[str,str,str], number: Optional[int] = 0):
     """
     Вспогательная функция. Используется в трех шагах Then.
-    Сравнивает элементы из data с context.result
+    Сравнивает элементы из column с context.result
 
     Keyword arguments:
     _context -- global context
-    column -- столбец first, second или third в сценарии "Retrieving 3 variables" в data table
+    column -- столбец first, second или third в сценарии "Retrieving 3 variables" в Examples
     number -- индекс 0, 1 или 2 для доступа к соответствующему элементу context.result (default 0)
     """
     if number not in range(3):
