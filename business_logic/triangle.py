@@ -18,7 +18,7 @@ EXCEPTIONS = {
 }
 
 
-def validate_number_of_arguments(sides) -> tuple:
+def validate_number_of_arguments(sides: list) -> tuple:
     """Validating number of sides to be equal 3 and returns sides as three variables, if it's not - raises ValueError"""
     a, b, c = sides
     return a, b, c

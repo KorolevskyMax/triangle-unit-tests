@@ -3,28 +3,41 @@ Feature: Check validate number of arguments function
   Background: #задаем общий контекст для тестирования, а именно - имя используемой функции
     Given I have to test "validate_number_of_arguments" function
 
-  # позитивный тест - получения трех переменных
   Scenario: Retrieving 3 variables
-    # задаем начальные данные
     Given I have a set of parameters: [1, 2, 3]
-    # передаем параметры в функцию
     When I pass parameters to the function
-    # сверяем результат (результат приводится перед сравнением к строке
     Then I should get result: ('1', '2', '3')
+    And result type should be: tuple
+
+  Scenario: Retrieving 3 variables
+    Given I have a set of parameters: [1, 2, 3]
+    And I cast every parameter to: int
+    When I pass parameters to the function
+    Then I should get result: (1, 2, 3)
+    And result type should be: tuple
 
   Scenario Outline: Pass incorrect amount of variables
-    # задаем начальные данные
-    Given I have a set of parameters: [<params>]
-    # передаем параметры в функцию
+    Given I have a set of parameters: <params>
+    And I cast parameters to: <type>
     When I pass parameters to the function
-    # сверяем текст ошибки (результат приводится перед сравнением к строке)
     Then I should get result: <error>
-    # сверяем тип ошибки
+    And result error type should be: <error_type>
+
+    Examples:
+      | params     | type | error                                           | error_type |
+      | None       | None | cannot unpack non-iterable NoneType object      | TypeError  |
+      | Empty list | list | not enough values to unpack (expected 3, got 0) | ValueError |
+      | 1          | int  | cannot unpack non-iterable int object           | TypeError  |
+
+
+  Scenario Outline: Pass incorrect amount of variables
+    Given I have a set of parameters: [<params>]
+    When I pass parameters to the function
+    Then I should get result: <error>
     And result error type should be: ValueError
 
     Examples:
       | params     | error                                           |
-      | none       | not enough values to unpack (expected 3, got 0) |
       | a          | not enough values to unpack (expected 3, got 1) |
       | 1, 2       | not enough values to unpack (expected 3, got 2) |
       | !, @, #, $ | too many values to unpack (expected 3)          |
