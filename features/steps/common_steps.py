@@ -23,7 +23,7 @@ def step_impl(context, params):
 def step_impl(context):
     try:
         context.actual_result = context.function(context.params)
-    except ValueError as exception:
+    except Exception as exception:
         context.actual_result = exception
 
 
@@ -41,3 +41,8 @@ def step_impl(context, expected_error_type):
 def step_impl(context, expected_type):
     for x in context.actual_result:
         assert_equals(type(x).__name__, expected_type)
+
+
+@step("I cast parameters to: {cast_type}")
+def step_impl(context, cast_type):
+    context.params = [eval(cast_type)(x) for x in context.params]

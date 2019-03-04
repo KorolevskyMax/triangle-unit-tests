@@ -55,7 +55,7 @@ def check_that_triangle_could_exist(a, b, c):
         #     raise Exception(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a)) #here is a bug
         # TODO: HOMEWORK! how to organize this validation to shorten the spaghetti code? """
     else:
-        raise ValueError("incorrect parameter type")
+        raise ValueError("incorrect parameters type or\\and incorrect amount of variables")
 
 
 def get_triangle_type(a, b, c):
