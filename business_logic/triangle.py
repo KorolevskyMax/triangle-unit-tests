@@ -24,12 +24,12 @@ def validate_number_of_arguments(sides: list) -> tuple:
     return a, b, c
 
 
-def convert_arguments_to_floats(sides) -> list:
+def convert_arguments_to_floats(sides: list) -> list:
     """Converts and returns list of variables to list of floats, if couldn't - raises ValueError"""
     return [float(x) for x in sides]
 
 
-def check_that_triangle_could_exist(a, b, c) -> int:
+def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     """Checks that triangle sides greater than zero, if not - raises AssertionError
     :param a:
     :param b:
@@ -60,7 +60,7 @@ def check_that_triangle_could_exist(a, b, c) -> int:
         raise ValueError("incorrect parameters type or\\and incorrect amount of variables")
 
 
-def get_triangle_type(a, b, c):
+def get_triangle_type(a: float, b: float, c: float) -> str:
     """Defines triangle type, returns triangle description as a string
     This is an example of docstring tests:
     >>> get_triangle_type(1, 1, 1)
@@ -88,7 +88,7 @@ def get_triangle_type(a, b, c):
         return "This is a usual triangle."
 
 
-def validate_triangle(sides):
+def validate_triangle(sides: list) -> str:
     """Validating triangle, returns exceptions if something went wrong or triangle type if triangle is valid"""
     sides = convert_arguments_to_floats(sides)
     a, b, c = validate_number_of_arguments(sides)

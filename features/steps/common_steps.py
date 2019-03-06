@@ -8,6 +8,7 @@ import business_logic.triangle as triangle
 def step_impl(context, function_name):
     context.function = getattr(triangle, function_name)
 
+
 @given("I have a set of parameters: [{params}]")
 def step_impl(context, params):
     context.params = params.split(", ")
@@ -25,22 +26,16 @@ def step_impl(context, params):
 
 @given("I cast parameters to: {cast_type}")
 def step_impl(context, cast_type):
-    if cast_type != "None":
+    if cast_type != "None" and cast_type != 'no_cast':
         context.params = eval(cast_type)(context.params)
     else:
         context.params = None
 
 
-
 @given("I cast every parameter to: {cast_type}")
 def step_impl(context, cast_type):
-    # try:
-    #     context.params = [eval(cast_type)(x) for x in context.params]
-    # except TypeError:
-    #     pass
-    # except ValueError:
-    #     pass
-    context.params = [eval(cast_type)(x) for x in context.params]
+    if cast_type != "no_cast":
+        context.params = [eval(cast_type)(x) for x in context.params]
 
 
 @when("I pass parameters to the function")
@@ -66,5 +61,3 @@ def step_impl(context, expected_type):
 def step_impl(context, expected_type):
     for x in context.actual_result:
         assert_equals(type(x).__name__, expected_type)
-
-
