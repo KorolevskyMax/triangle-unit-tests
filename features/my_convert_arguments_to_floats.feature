@@ -44,7 +44,7 @@ Feature: Check converting of arguments to floats (my)
 #    Given I have a set of parameters: <params>
 #    Examples:
 #      | params |
-
+# TODO: доделать тесты с пустыми списочными элементами
 
   Scenario Outline: Pass parameters with incorrect type
     Given I have a set of parameters: <params>
@@ -53,20 +53,20 @@ Feature: Check converting of arguments to floats (my)
     Then I should get result: <msg_exception>
     And result error type should be: <exception>
     Examples:
-      | params     | cast_type | exception   | msg_exception                                    |
-      | None       | None      | TypeError   | 'NoneType' object is not iterable                |
-      | str        | str       | ValueError  | could not convert string to float: 's'           |
-      | True       | bool      | TypeError  | 'bool' object is not iterable                     |
-      | +-1        | str       | ValueError  | could not convert string to float: '+'           |
-      | # $ % ^    | list      | ValueError  | could not convert string to float: '#'           |
-      | # $ % ^    | str       | ValueError  | could not convert string to float: '#' |
-      | str        | tuple     | ValueError   | could not convert string to float: 's'          |
-      | str        | list      | ValueError   | could not convert string to float: 's'          |
-#      | 0b11       | int       | ValueError  | invalid literal for int() with base 10: '0b11' |
-#      | 0x13       | int       | ValueError  | invalid literal for int() with base 10: '0x13' |
-#      | 0o23       | int       | ValueError  | invalid literal for int() with base 10: '0o23' |
-      | Ⅻ         | str       | ValueError  | could not convert string to float: 'Ⅻ'          |
-      | ⅓          | str       | ValueError  | could not convert string to float: '⅓'           |
-      | ¹          | str       | ValueError  | could not convert string to float: '¹'           |
+      | params  | cast_type | exception  | msg_exception                          |
+      | None    | None      | TypeError  | 'NoneType' object is not iterable      |
+      | str     | str       | ValueError | could not convert string to float: 's' |
+      | True    | bool      | TypeError  | 'bool' object is not iterable          |
+      | +-1     | str       | ValueError | could not convert string to float: '+' |
+      | # $ % ^ | list      | ValueError | could not convert string to float: '#' |
+      | # $ % ^ | str       | ValueError | could not convert string to float: '#' |
+      | str     | tuple     | ValueError | could not convert string to float: 's' |
+      | str     | list      | ValueError | could not convert string to float: 's' |
+      | 0b11    | no_cast   | TypeError  | 'NoneType' object is not iterable      |
+      | 0x13    | no_cast   | TypeError  | 'NoneType' object is not iterable      |
+      | 0o23    | no_cast   | TypeError  | 'NoneType' object is not iterable      |
+      | Ⅻ       | str       | ValueError | could not convert string to float: 'Ⅻ' |
+      | ⅓       | str       | ValueError | could not convert string to float: '⅓' |
+      | ¹       | str       | ValueError | could not convert string to float: '¹' |
 
 

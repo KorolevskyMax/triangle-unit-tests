@@ -26,7 +26,7 @@ def step_impl(context, params):
 
 @given("I cast parameters to: {cast_type}")
 def step_impl(context, cast_type):
-    if cast_type != "None":
+    if cast_type != "None" and cast_type != 'no_cast':
         context.params = eval(cast_type)(context.params)
     else:
         context.params = None
