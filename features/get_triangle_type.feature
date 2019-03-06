@@ -5,11 +5,11 @@ Feature: Validate get triangle type function
 
   # позитивные тесты:
   Scenario Outline: Check function result with correct parameters
-    Given I have 3 parameters: <a>, <b>, <c>
+    Given I have a set of parameters: [<params>]
     And I cast every parameter to: <type>
+    And I cast parameters to: dict
     When I pass parameters to the function
     Then I should get result: <result>
-    And type of each result variable: float
 
     Examples:
       | params  | result                          | type  |
@@ -36,11 +36,11 @@ Feature: Validate get triangle type function
 
 # негативные тесты:
   Scenario Outline: Check function result with incorrect parameters
-    Given I have 3 parameters: <a>, <b>, <c>
+    Given I have a set of parameters: [<params>]
     And I cast every parameter to: <type>
+    And I cast parameters to: dict
     When I pass parameters to the function
     Then I should get result: <result>
-    And type of each result variable: float
 
     Examples:
       | params      | result                 | type  |
@@ -50,6 +50,7 @@ Feature: Validate get triangle type function
       | 3, 4, -5    | This is not a triangle | float |
       | 4, -5, 3    | This is not a triangle | float |
       | -5, 3, 4    | This is not a triangle | float |
+      | -5, -3, -4  | This is not a triangle | float |
     # сумма 2-х чисел равна 3-му
       | 1, 2, 3     | This is not a triangle | float |
       | 2, 3, 1     | This is not a triangle | float |
