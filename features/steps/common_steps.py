@@ -31,8 +31,15 @@ def step_impl(context, cast_type):
         context.params = None
 
 
+
 @given("I cast every parameter to: {cast_type}")
 def step_impl(context, cast_type):
+    # try:
+    #     context.params = [eval(cast_type)(x) for x in context.params]
+    # except TypeError:
+    #     pass
+    # except ValueError:
+    #     pass
     context.params = [eval(cast_type)(x) for x in context.params]
 
 
