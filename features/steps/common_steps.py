@@ -26,8 +26,15 @@ def step_impl(context, params):
 
 @given("I cast parameters to: {cast_type}")
 def step_impl(context, cast_type):
-    if cast_type != "None" and cast_type != 'no_cast':
+    if cast_type != "None" and cast_type != 'no_cast' and cast_type != 'dict':
         context.params = eval(cast_type)(context.params)
+    elif cast_type == 'dict':
+        a, b, c = tuple(context.params)
+        context.params = {
+            'a': a,
+            'b': b,
+            'c': c
+        }
     else:
         context.params = None
 
@@ -41,7 +48,10 @@ def step_impl(context, cast_type):
 @when("I pass parameters to the function")
 def step_impl(context):
     try:
-        context.actual_result = context.function(context.params)
+        if type(context.params) != dict:
+            context.actual_result = context.function(context.params)
+        else:
+            context.actual_result = context.function(**context.params)
     except Exception as exception:
         context.actual_result = exception
 
