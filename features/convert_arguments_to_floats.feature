@@ -11,12 +11,9 @@ Feature: Check converting of arguments to floats
   # пустого списка
   # нулей
   Scenario Outline: Converting string containing an integers or\and floats with\without sign value
-    # задаем начальные данные
     Given I have a set of parameters: [<params>]
-    And I cast parameters to: <type>
-    # передаем параметры в функцию
+    And I cast every parameter to: <type>
     When I pass parameters to the function
-    # сверяем результат (результат приводится перед сравнением к строке)
     Then I should get result: <result>
     And type of each result variable: float
 
@@ -28,7 +25,6 @@ Feature: Check converting of arguments to floats
       | +1000                | [1000.0]              | no_cast |
       | 1, 1.5, 2, 2.0       | [1.0, 1.5, 2.0, 2.0]  | no_cast |
       | -2, -1.5, -1.01      | [-2.0, -1.5, -1.01]   | no_cast |
-      | none                 | []                    | no_cast |
       | -0, 0, +0            | [-0.0, 0.0, 0.0]      | no_cast |
       | +1.2, 1.9999, 0.0001 | [1.2, 1.9999, 0.0001] | no_cast |
       | 1e-06, 0.000001      | [1e-06, 1e-06]        | no_cast |
@@ -36,14 +32,10 @@ Feature: Check converting of arguments to floats
 
 
   Scenario Outline: Pass incorrect variables types
-    # задаем начальные данные
     Given I have a set of parameters: [<params>]
-    And I cast parameters to: <type>
-    # передаем параметры в функцию
+    And I cast every parameter to: <type>
     When I pass parameters to the function
-    # сверяем текст ошибки (результат приводится перед сравнением к строке)
     Then I should get result: <error>
-    # сверяем тип ошибки
     And result error type should be: <error_type>
 
     Examples:
@@ -55,3 +47,18 @@ Feature: Check converting of arguments to floats
       | 1+1        | could not convert string to float: '1+1'                   | str   | ValueError |
       | word       | float() argument must be a string or a number, not 'list'  | list  | TypeError  |
       | word       | float() argument must be a string or a number, not 'tuple' | tuple | TypeError  |
+      | word       | float() argument must be a string or a number, not 'tuple' | tuple | TypeError  |
+
+
+  Scenario Outline: Pass other variable types instead of list
+    Given I have a set of parameters: <params>
+    And I cast parameters to: <type>
+    When I pass parameters to the function
+    Then I should get result: <result>
+    And result type should be: <result_type>
+    Examples:
+      | params | result                            | type  | result_type |
+      | None   | 'NoneType' object is not iterable | None  | TypeError   |
+      | 123    | [1.0, 2.0, 3.0]                   | str   | list        |
+      | 123    | 'float' object is not iterable    | float | TypeError   |
+      | 123    | 'int' object is not iterable      | int   | TypeError   |
