@@ -25,9 +25,9 @@ Feature: Check validate number of arguments function
 
     Examples:
       | params     | type | error                                           | error_type |
-      | None       | None | cannot unpack non-iterable NoneType object      | TypeError  |
+      | None       | None | 'NoneType' object is not iterable               | TypeError  |
       | Empty list | list | not enough values to unpack (expected 3, got 0) | ValueError |
-      | 1          | int  | cannot unpack non-iterable int object           | TypeError  |
+      | 1          | int  | 'int' object is not iterable                    | TypeError  |
 
 
   Scenario Outline: Pass incorrect amount of variables
