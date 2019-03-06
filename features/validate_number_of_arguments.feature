@@ -1,18 +1,43 @@
 Feature: Check validate number of arguments function
 
-  Scenario Outline: Retrieving 3 variables
-    Given list of variables
-      | first | second | third |
-      | 1     | 2      | 3     |
-      | 2     | 3      | 1     |
-      | 3     | 1      | 2     |
+  Background: #задаем общий контекст для тестирования, а именно - имя используемой функции
+    Given I have to test "validate_number_of_arguments" function
 
-    When I pass variables to function
-    Then 1st variable equals <first>
-    And 2nd variable equals <second>
-    And 3nd variable equals <third>
+  Scenario: Retrieving 3 variables
+    Given I have a set of parameters: [1, 2, 3]
+    When I pass parameters to the function
+    Then I should get result: ('1', '2', '3')
+    And result type should be: tuple
+
+  Scenario: Retrieving 3 variables
+    Given I have a set of parameters: [1, 2, 3]
+    And I cast every parameter to: int
+    When I pass parameters to the function
+    Then I should get result: (1, 2, 3)
+    And result type should be: tuple
+
+  Scenario Outline: Pass incorrect amount of variables
+    Given I have a set of parameters: <params>
+    And I cast parameters to: <type>
+    When I pass parameters to the function
+    Then I should get result: <error>
+    And result error type should be: <error_type>
+
     Examples:
-      | first | second | third |
-      | 1     | 2      | 3     |
-      | 2     | 3      | 1     |
-      | 3     | 1      | 2     |
+      | params     | type | error                                           | error_type |
+      | None       | None | cannot unpack non-iterable NoneType object      | TypeError  |
+      | Empty list | list | not enough values to unpack (expected 3, got 0) | ValueError |
+      | 1          | int  | cannot unpack non-iterable int object           | TypeError  |
+
+
+  Scenario Outline: Pass incorrect amount of variables
+    Given I have a set of parameters: [<params>]
+    When I pass parameters to the function
+    Then I should get result: <error>
+    And result error type should be: ValueError
+
+    Examples:
+      | params     | error                                           |
+      | a          | not enough values to unpack (expected 3, got 1) |
+      | 1, 2       | not enough values to unpack (expected 3, got 2) |
+      | !, @, #, $ | too many values to unpack (expected 3)          |
