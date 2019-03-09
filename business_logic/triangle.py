@@ -48,6 +48,10 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     elif c < 0:
         raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, c))
     elif not (a + b > c):
+# Чекир: Если в функцию передать, например: #, 1, s и исп no_cast, то программа попробует
+# сложить # и 1, что приведет к ошибке: '<' not supported between instances of 'str' and 'int'
+# хотя, в таком случае, видимо, предполагалась, что исполнится последний пунки, а именно
+# raise ValueError
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, b, c))
     elif not (a + c > b):
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, c, b))
@@ -80,6 +84,7 @@ def get_triangle_type(a: float, b: float, c: float) -> str:
         check_that_triangle_could_exist(a, b, c)
     except (ValueError, AssertionError) as _:
         return "This is not a triangle"
+
     if (a == b == c):
         return "This is a equilateral triangle."
     elif (a == b or a == c or b == c):
