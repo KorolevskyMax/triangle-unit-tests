@@ -50,7 +50,7 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     elif not (a + b > c):
 # Чекир: Если в функцию передать, например: #, 1, s и исп no_cast, то программа попробует
 # сложить # и 1, что приведет к ошибке: '<' not supported between instances of 'str' and 'int'
-# хотя, в таком случае, видимо, предполагалась, что исполнится последний пунки, а именно
+# хотя, в таком случае, видимо, предполагалась, что исполнится последний пункт, а именно
 # raise ValueError
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, b, c))
     elif not (a + c > b):
@@ -59,6 +59,7 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     #     raise Exception(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a)) #here is a bug
     # TODO: HOMEWORK! how to organize this validation to shorten the spaghetti code? """
     elif (a + c < b) or (a + b > c) or (b + c > a):
+        print(a, b, c, a + c < b, a + b > c, b + c > a)
         return 0
     else:
         raise ValueError("incorrect parameters type or\\and incorrect amount of variables")

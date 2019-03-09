@@ -41,7 +41,9 @@ def step_impl(context, cast_type):
 
 @given("I cast every parameter to: {cast_type}")
 def step_impl(context, cast_type):
-    if cast_type != "no_cast":
+    if cast_type == 'bool':
+        context.params = [(lambda x: x.lower() == 'true')(x) for x in context.params]
+    elif cast_type != "no_cast":
         context.params = [eval(cast_type)(x) for x in context.params]
 
 

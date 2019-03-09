@@ -92,6 +92,8 @@ Feature: Validate get triangle type function
       | True, True, True    | This is not a triangle | bool    |
       # Тест 1.23
       # Плохо, False превратился в 0 и программа думает, что 0, 0, 0 это все еще ▲.
+      # Коммент выше устарел и, кстати, был неверным. См. check_that_triangle_could_exist.feature
+      # Теперь хорошо, т.к. я обновил @given("I cast every parameter to: {cast_type}")
       | False, False, False | This is not a triangle | bool    |
       # Передаем неправильное колич аргументов
       # Закоментировано, т.к. ошибка ловится копмпилятором
