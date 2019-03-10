@@ -91,7 +91,7 @@ Feature: Validate get triangle type function
       | 12, 15, 30     | This is not a triangle | float |
 
 
-  """Scenario Outline: <Check figure with incorrect parameters>
+  """ Scenario Outline: <Check figure with incorrect parameters>
     Given I have a set of parameters: [<params>]
     And I cast every parameter to: <type>
     And I cast parameters to: dict
