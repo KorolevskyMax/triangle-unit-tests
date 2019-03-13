@@ -1,0 +1,4 @@
+tests:
+  build:
+    dockerfile: Dockerfile
+  cached: true
