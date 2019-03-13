@@ -55,6 +55,13 @@ def step_impl(context):
     except Exception as exception:
         context.actual_result = exception
 
+@when("I pass parameters to the program")
+def step_imp(context):
+    import subprocess
+    process = subprocess.Popen(["python", "app.py"] + context.params, stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    context.actual_result = output.decode("utf-8").strip()
+
 
 @then("I should get result: {expected_result}")
 def step_impl(context, expected_result):
