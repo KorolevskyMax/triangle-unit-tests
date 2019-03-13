@@ -4,13 +4,9 @@ Feature: Validate get triangle type function
     Given I have to test "get_triangle_type" function
 
   # позитивные тесты:
-  Scenario Outline: <Название вашего сценария здесь>
-    Given I have a set of parameters: [<params>]
-    And I cast every parameter to: <type>
+  Scenario Outline: Check equilateral triangle.
+    Given I have a set of parameters: [1, 1, 1]
+    And I cast every parameter to: dict
     When I pass parameters to the function
-    Then I should get result: <result>
+    Then I should get result: This is a equilateral triangle.
     And type of each result variable: float
-
-    Examples:
-      | params | result | type |
-      |        |        |      |
