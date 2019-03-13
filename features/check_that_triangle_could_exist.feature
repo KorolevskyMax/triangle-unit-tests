@@ -25,7 +25,7 @@ Feature: Validate check_that_triangle_could_exist function
       | 1, 2, 3             | triangle with sides a:1.0, b:2.0 and c:3.0 couldn't exist, because 1.0 + 2.0 <= 3.0       | float   |
       | 2, 3, 1             | triangle with sides a:2.0, b:3.0 and c:1.0 couldn't exist, because 2.0 + 1.0 <= 3.0       | float   |
       # Тест 1.9
-      | 3, 1, 2             | triangle with sides a:3.0, b:1.0 and c:2.0 couldn't exist, because 2.0 + 1.0 <= 3.0       | float   |
+      | 3, 1, 2             | triangle with sides a:3.0, b:1.0 and c:2.0 couldn't exist, because 1.0 + 2.0 <= 3.0       | float   |
       # сумма двух чисел меньше третьего
       | 12, 15, 30          | triangle with sides a:12.0, b:15.0 and c:30.0 couldn't exist, because 12.0 + 15.0 <= 30.0 | float   |
       | 15, 30, 12          | triangle with sides a:15.0, b:30.0 and c:12.0 couldn't exist, because 15.0 + 12.0 <= 30.0 | float   |
