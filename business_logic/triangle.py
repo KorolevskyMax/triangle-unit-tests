@@ -36,13 +36,13 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     :param c:
     """
     if a == 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, a))
+        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'a'))
     elif b == 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, b))
+        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'b'))
     elif c == 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, b))  # here is a bug
+        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'c'))
     elif a < 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, a))  # here is a bug
+        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, a))
     elif b < 0:
         raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, b))
     elif c < 0:
@@ -51,9 +51,8 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, b, c))
     elif not (a + c > b):
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, c, b))
-    # elif not(b + c > a):
-    #     raise Exception(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a)) #here is a bug
-    # TODO: HOMEWORK! how to organize this validation to shorten the spaghetti code? """
+    elif not(b + c > a):
+        raise Exception(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a))
     elif (a + c < b) or (a + b > c) or (b + c > a):
         return 0
     else:
@@ -77,7 +76,7 @@ def get_triangle_type(a: float, b: float, c: float) -> str:
     """
 
     try:
-        check_that_triangle_could_exist(a, b, c)
+            check_that_triangle_could_exist(a, b, c)
     except (ValueError, AssertionError) as _:
         return "This is not a triangle"
     if (a == b == c):
