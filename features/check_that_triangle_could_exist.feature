@@ -2,6 +2,9 @@
 Feature: Check that triangle could exist
   # Enter feature description here
 
+  Background: #задаем общий контекст для тестирования, а именно - имя используемой функции
+    Given I have to test "check_that_triangle_could_exist.feature" function
+
   Scenario Outline: <Check that triangle could exist>
     Given I have a set of parameters: [<params>]
     And I cast every parameter to: <type>
@@ -9,20 +12,25 @@ Feature: Check that triangle could exist
     When I pass parameters to the function
     Then I should get result: <result>
 
+#NEGATIVE TESTS
 
     Examples:
-      | params   | result                            | type  |
+      | params   | result                                                                      | type  |
 
-      | 3, 3, 3  | This isosceles triangle can exist | float |
-      | 2, 2, 3  | This isosceles triangle can exist | float |
-      | 2, 3, 3  | This isosceles triangle can exist | float |
-      | 3, 2, 2  | This isosceles triangle can exist | float |
-      | 4, 3, 5  | This usual triangle can exist     | float |
-      | 3, 4, 5  | This usual triangle can exist     | float |
-      | 5, 4, 3  | This usual triangle can exist     | float |
-      | 3, 5, 4  | This usual triangle can exist     | float |
-      | 4, 5, 3  | This usual triangle can exist     | float |
-      | 5, 3, 4  | This usual triangle can exist     | float |
-      | 1, 1, 1  | This triangle can't exist         | float |
-      | 0, 10, 5 | This triangle can't exist         | float |
-      | -5, 2, 3 | This triangle can't exist         | float |
+      #одна, две или три стороны равны нулю
+
+      | 0, 3, 5  | triangle with sides a:0, b:3 and c:5 couldn't exist, because a = 0    | float |
+      | 0, 0, 5  | triangle with sides a:0.0, b:0.0, c:5.0 couldn't exist, because a and b = 0 | float |
+
+      #одна из сторон отрицательная (то есть меньше нуля)
+
+
+      | -3, 4, 5 | triangle with sides a:-3, b:4 and c:5 couldn't exist, because a < 0         | float |
+
+    #одна сторона меньше суммы двух других сторон
+
+      | 6, 2, 3  | triangle with sides a:6, b:2 and c:3 couldn't exist, because b + c <= a     | float |
+
+
+
+
