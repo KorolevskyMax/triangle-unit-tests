@@ -35,27 +35,28 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     :param b:
     :param c:
     """
-    if a == 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'a'))
-    elif b == 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'b'))
-    elif c == 0:
-        raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'c'))
-    elif a < 0:
-        raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, a))
-    elif b < 0:
-        raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, b))
-    elif c < 0:
-        raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, c))
-    elif not (a + b > c):
-        raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, b, c))
-    elif not (a + c > b):
-        raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, c, b))
-    elif not(b + c > a):
-        raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a))
-    elif (a + c > b) or (a + b > c) or (b + c > a):
-        return 0
-    else:
+    try:
+        if a == 0:
+            raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'a'))
+        elif b == 0:
+            raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'b'))
+        elif c == 0:
+            raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, 'c'))
+        elif a < 0:
+            raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, a))
+        elif b < 0:
+            raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, b))
+        elif c < 0:
+            raise AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, c))
+        elif not (a + b > c):
+            raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, b, c))
+        elif not (a + c > b):
+            raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, c, b))
+        elif not (b + c > a):
+            raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a))
+        elif (a + c > b) or (a + b > c) or (b + c > a):
+            return 0
+    except (TypeError, ValueError) as _:
         raise ValueError("incorrect parameters type or\\and incorrect amount of variables")
 
 
