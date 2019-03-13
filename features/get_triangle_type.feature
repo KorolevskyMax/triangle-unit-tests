@@ -89,7 +89,7 @@ Feature: Validate get triangle type function
       # ОК, python привел True к 1 и подумал что это равносторонний треугольник,
       # Так что, возможно, result можно заменить на "This is a equilateral triangle."
       # чтобы этот тест прошел и перенести его в позитивные тесты
-      | True, True, True    | This is not a triangle | bool    |
+      | True, True, True    | This is a equilateral triangle. | bool    |
       # Тест 1.23
       # Плохо, False превратился в 0 и программа думает, что 0, 0, 0 это все еще ▲.
       # Коммент выше устарел и, кстати, был неверным. См. check_that_triangle_could_exist.feature
