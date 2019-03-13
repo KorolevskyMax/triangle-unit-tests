@@ -12,25 +12,37 @@ Feature: Validate get triangle type function
     Then I should get result: <result>
 
     Examples:
-      | params        | result                          | type  |
-      | 3, 3, 3       | This is a equilateral triangle. | int   |
-      | 3, 3, 3       | This is a equilateral triangle. | float |
-      | 2, 2, 3       | This is a isosceles triangle.   | int   |
-      | 2, 2, 3       | This is a isosceles triangle.   | float |
-      | 2, 3, 3       | This is a isosceles triangle.   | int   |
-      | 3, 2, 2       | This is a isosceles triangle.   | int   |
-      | 3.2, 2.5, 3.8 | This is a usual triangle.       | float |
-      | 4, 3, 5       | This is a usual triangle.       | int   |
-      | 3, 4, 5       | This is a usual triangle.       | int   |
-      | 5, 4, 3       | This is a usual triangle.       | int   |
-      | 5, 4, 3       | This is a usual triangle.       | float   |
-      | 3, 5, 4       | This is a usual triangle.       | int   |
-      | 4, 5, 3       | This is a usual triangle.       | int   |
-      | 5, 3, 4       | This is a usual triangle.       | int   |
-      | 1, 2, 3       | This is not a triangle          | int   |
-      | 2, 3, 1       | This is not a triangle          | int   |
-      | 3, 2, 1       | This is not a triangle          | int   |
-      | 3.0, 2.0, 1.0 | This is not a triangle          | float |
+      | params  | result                          | type  |
+
+      # equilateral triangle (равносторонний треугольник)
+
+      | 3, 3, 3 | This is a equilateral triangle. | int   |
+      | 3, 3, 3 | This is a equilateral triangle. | float |
+
+      # isosceles triangle (равнобедренный треугольник)
+      | 2, 2, 3 | This is a isosceles triangle.   | int   |
+      | 2, 3, 2 | This is a isosceles triangle.   | int   |
+      | 3, 2, 2 | This is a isosceles triangle.   | int   |
+
+      | 2, 2, 3 | This is a isosceles triangle.   | float |
+      | 2, 3, 2 | This is a isosceles triangle.   | float |
+      | 3, 2, 2 | This is a isosceles triangle.   | float |
+
+      # usual triangle (разносторонний треугольник)
+      | 4, 3, 5 | This is a usual triangle.       | int   |
+      | 3, 5, 4 | This is a usual triangle.       | int   |
+      | 5, 4, 3 | This is a usual triangle.       | int   |
+      | 4, 5, 3 | This is a usual triangle.       | int   |
+      | 3, 4, 5 | This is a usual triangle.       | int   |
+      | 5, 3, 4 | This is a usual triangle.       | int   |
+
+      | 4, 3, 5 | This is a usual triangle.       | float |
+      | 3, 5, 4 | This is a usual triangle.       | float |
+      | 5, 4, 3 | This is a usual triangle.       | float |
+      | 4, 5, 3 | This is a usual triangle.       | float |
+      | 3, 4, 5 | This is a usual triangle.       | float |
+      | 5, 3, 4 | This is a usual triangle.       | float |
+
 
   Scenario Outline: <Check that this is not a triangle>
     Given I have a set of parameters: [<params>]
@@ -39,10 +51,23 @@ Feature: Validate get triangle type function
     When I pass parameters to the function
     Then I should get result: <result>
 
+    # NEGATIVE TESTS
+
     Examples:
-      | params  | result                        | type  |
-      | 1, 2, 3 | This is not a triangle        | int   |
-      | 2, 3, 1 | This is not a triangle        | int   |
- # !| 3.5, 3, 3       | This is a equilateral triangle. | float |
-      | 3, 2, 1 | This is not a triangle        | int   |
+      | params  | result                 | type |
+      # есть отрицательные значения
+      | -5, 4, 3 | This is not a triangle | float  |
+      | -5, -4, 3 | This is not a triangle | float  |
+      | -5, -4, -3 | This is not a triangle | float  |
+
+      # есть стороны, равные нулю
+      | 0, 4, 3 | This is not a triangle | float  |
+      | 0, 0, 3 | This is not a triangle | float  |
+      | 0, 0, 0 | This is not a triangle | float  |
+
+    # треугольник не может быть построен, потому что а) сумма двух сторон = третьей стороне, б) одна из сторон меньше суммы двух сторон
+      | 1, 2, 3 | This is not a triangle | float  |
+      | 2, 2, 5 | This is not a triangle | float  |
+
+
 
