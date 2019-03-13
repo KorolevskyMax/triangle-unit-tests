@@ -1,0 +1,6 @@
+- name: api tests
+  type: serial
+  steps:
+    - name: Execute acceptance tests
+      service: tests
+      command: behave
