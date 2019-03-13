@@ -53,7 +53,7 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, c, b))
     elif not(b + c > a):
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a))
-    elif (a + c < b) or (a + b > c) or (b + c > a):
+    elif (a + c > b) or (a + b > c) or (b + c > a):
         return 0
     else:
         raise ValueError("incorrect parameters type or\\and incorrect amount of variables")
