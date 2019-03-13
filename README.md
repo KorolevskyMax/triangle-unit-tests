@@ -1,1 +1,2 @@
 # triangle-unit-tests
+[![Codeship Status for KorolevskyMax/triangle-unit-tests](https://app.codeship.com/projects/0be8c100-27d3-0137-a762-52605ac43686/status?branch=master)](https://app.codeship.com/projects/330662)
