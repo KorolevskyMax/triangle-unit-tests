@@ -35,6 +35,33 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
     :param b:
     :param c:
     """
+    # var = a and b and c
+    # if not var:
+    #     raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, var))
+
+    # import operator
+    # import itertools
+    #
+    # params = [a, b, c,]
+    # operators = [operator.eq, operator.lt,]
+    # exceptions = [
+    #     lambda var: AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, var)),
+    #     lambda var: AssertionError(EXCEPTIONS['less_than_zero'].format(a, b, c, var)),
+    # ]
+    # for op, err in zip(operators, exceptions):
+    #     for var in params:
+    #         if op(var, 0):
+    #             raise err(var)
+    #
+    # for a, b, c in itertools.permutations(params, r=3):
+    #     if not a + b > c:
+    #         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, b, c))
+    #
+    # for a, b, c in itertools.permutations(params, r=3):
+    #     if a + b > c:
+    #         return 0
+
+
     if a == 0:
         raise AssertionError(EXCEPTIONS['equal_zero'].format(a, b, c, a))
     elif b == 0:
@@ -57,13 +84,12 @@ def check_that_triangle_could_exist(a: float, b: float, c: float) -> int:
         raise AssertionError(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, a, c, b))
     # elif not(b + c > a):
     #     raise Exception(EXCEPTIONS['two_sides_greater_than_third'].format(a, b, c, b, c, a)) #here is a bug
-    # TODO: HOMEWORK! how to organize this validation to shorten the spaghetti code? """
+    # TODO: HOMEWORK! how to organize this validation to shorten the spaghetti code?
     elif (a + c < b) or (a + b > c) or (b + c > a):
         print(a, b, c, a + c < b, a + b > c, b + c > a)
         return 0
     else:
         raise ValueError("incorrect parameters type or\\and incorrect amount of variables")
-
 
 def get_triangle_type(a: float, b: float, c: float) -> str:
     """Defines triangle type, returns triangle description as a string
