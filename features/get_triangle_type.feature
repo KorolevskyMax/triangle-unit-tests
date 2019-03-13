@@ -45,6 +45,12 @@ Feature: Validate get triangle type function
       | 2., 3., 1. | This is not a triangle          | float |
       | 3., 1., 2. | This is not a triangle          | float |
       | 3., 2., 1. | This is not a triangle          | float |
+      | 2, 1, 1    | This is not a triangle          | int   |
+      | 1, 2, 1    | This is not a triangle          | int   |
+      | 1, 1, 2    | This is not a triangle          | int   |
+      | 2., 1., 1. | This is not a triangle          | float |
+      | 1., 2., 1. | This is not a triangle          | float |
+      | 1., 1., 2. | This is not a triangle          | float |
       | 1, 1, 3    | This is not a triangle          | int   |
       | 1, 3, 1    | This is not a triangle          | int   |
       | 3, 1, 1    | This is not a triangle          | int   |
