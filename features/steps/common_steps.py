@@ -60,10 +60,11 @@ def step_impl(context):
 
 @when("I pass parameters to the program")
 def step_impl(context):
-    import subprocess
-    process = subprocess.Popen(["python", "app.py"] + context.params, stdout=subprocess.PIPE)
-    output, error = process.communicate()
-    context.actual_result = output.decode("utf-8").strip()
+    import subprocess as sub
+    with sub.Popen(["python", "app.py"] + context.params, stdout=sub.PIPE) as process:
+        output, error = process.communicate()
+        context.actual_result = output.decode("utf-8").strip()
+
 
 
 @then("I should get result: {expected_result}")
