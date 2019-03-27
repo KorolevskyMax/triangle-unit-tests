@@ -1,5 +1,4 @@
-Feature: Validate get triangle type function
-
+Feature: Validate get triangle type program [system_testing]
 
   Scenario: Check equilateral triangle.
     Given I have a set of parameters: [1, 1, 1]

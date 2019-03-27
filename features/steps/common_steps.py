@@ -63,6 +63,14 @@ def step_imp(context):
     context.actual_result = output.decode("utf-8").strip()
 
 
+@when("I pass parameters to the program")
+def step_impl(context):
+    import subprocess
+    process = subprocess.Popen(["python", "app.py"] + context.params, stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    context.actual_result = output.decode("utf-8").strip()
+
+
 @then("I should get result: {expected_result}")
 def step_impl(context, expected_result):
     assert_equals(expected_result, str(context.actual_result))
